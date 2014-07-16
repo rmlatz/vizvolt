@@ -1,7 +1,4 @@
-//<script> window.data = <%= @model %> </script>
-
 $(document).ready(function() {
-
 
   if (this.location.pathname === '/'){
     var url = '/states';
@@ -49,18 +46,7 @@ $(document).ready(function() {
         .attr("font-size", "12px")
         .style("text-anchor", "middle")
         .text(function(d) { return d.data.name + " - " + d.data.production; });
-      // var pos = d3.svg.arc().innerRadius(radius + 20).outerRadius(radius + 20);
-
-      // g.append("text")
-      //   .attr("transform", function(d) { return "translate(" +
-      // pos.centroid(d) + ")"; })
-      //   .attr("dy", ".05em")
-      //   .attr("text-anchor", "middle")
-      //   .text(function(d) { return d.data.name});
-
   });
-
-
 });
 
 
