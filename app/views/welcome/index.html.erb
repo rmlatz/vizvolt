@@ -1,0 +1,20 @@
+
+<div class="header">
+  <h1>Welcome To VizVolt</h1>
+  <h2>Please make a selection to see more data.</h2>
+</div>
+
+<div class="form">
+  <%= form_tag("/display", method: "get") do %>
+    <%= select_tag :state, options_for_select(@us_states), class: 'dropdown' %>
+    <%= select_tag :year, options_for_select(@years), class: 'dropdown' %>
+    <%= submit_tag("Search", class: 'button') %>
+  <% end %>
+</div>
+
+<div class="donut_holder" id="index">
+  <div id='container'></div>
+</div>
+
+
+

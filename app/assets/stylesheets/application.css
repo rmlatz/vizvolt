@@ -13,3 +13,63 @@
  *= require_tree .
  *= require_self
  */
+
+ body{
+  background-image: url("http://pinkimp.com/images/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+
+ }
+
+.header {
+  font-family: "Aldrich" monospace;
+  text-align: center;
+
+}
+
+.donut_holder{
+  float: left;
+  height: 600px;
+  margin:  0 auto;
+  text-align: center;
+  width: 800px;
+}
+
+.form {
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+.dropdown{
+  background-color: #E6E6E6;
+  border: 3px solid #000;
+  font-family: "Aldrich" monospace;
+  padding-top: 5px;
+}
+
+.button{
+  background-color: #E6E6E6;
+  border-radius: 10px;
+  font-family: "Aldrich" monospace;
+}
+
+.legend {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid #000;
+  color: #E6E6E6;
+  float: left;
+  margin-left: 10%;
+  margin-top: 5%;
+  text-align: left;
+  width: 315px;
+}
+
+.legend-list{
+  line-height: 1.3em;
+  list-style: none;
+}
+
+#index {
+  float: none;
+  text-align: center;
+}
