@@ -13,31 +13,33 @@
  *= require_tree .
  *= require_self
  */
-
- body{
-  background-image: url("http://pinkimp.com/images/background.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-
- }
-
-.header {
+.button{
+  background-color: #E6E6E6;
+  border-radius: 10px;
   font-family: "Aldrich" monospace;
-  text-align: center;
+}
 
+html body{
+  background-color: #EDECEC;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+p {
+  margin: 4px;
 }
 
 .donut_holder{
-  float: left;
   height: 600px;
   margin:  0 auto;
   text-align: center;
   width: 800px;
-}
-
-.form {
-  text-align: center;
-  padding-bottom: 25px;
 }
 
 .dropdown{
@@ -47,29 +49,26 @@
   padding-top: 5px;
 }
 
-.button{
-  background-color: #E6E6E6;
-  border-radius: 10px;
+.form {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.header {
+  font-family: "Aldrich" monospace;
+  text-align: center;
+}
+
+.textBottom {
   font-family: "Aldrich" monospace;
 }
 
-.legend {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid #000;
-  color: #E6E6E6;
-  float: left;
-  margin-left: 10%;
-  margin-top: 5%;
-  text-align: left;
-  width: 315px;
+.textTop {
+  font-family: "Aldrich" monospace;
 }
 
-.legend-list{
-  line-height: 1.3em;
-  list-style: none;
+#container {
+  width: 100%;
+  height: 100%;
 }
 
-#index {
-  float: none;
-  text-align: center;
-}

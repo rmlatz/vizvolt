@@ -6,47 +6,72 @@ $(document).ready(function() {
     var url = '/states/show' + this.location.search;
   }
 
-  var width = 800,
-      height = 600,
-      radius = Math.min(width, height) / 2;
+var numFormat = d3.format("0,000");
+  var w = 800,
+      h = 525,
+      r = Math.min(w, h) / 2;
+    inner = 110,
+    color = d3.scale.category20c();
+    d3.json(url, function (data) {
+      var max = d3.max(data, function(d) { return +d.production; });
+      var sum = d3.sum(data, function(d) { return +d.production; });
+      var vis = d3.select("#container")
+        .append("svg:svg")
+          .data([data])
+          .attr("width", w)
+          .attr("height", h + 20)
+          .append("svg:g")
+          .attr("transform", "translate(" + r * 1.5 + "," + (r + 10) + ")");
 
-  var color = d3.scale.ordinal()
-      .range(["#3C8EBD", "#D43E3C", "#92C53F", "#F1F1EE", "#323232"]);
+      var arc = d3.svg.arc()
+          .innerRadius(inner)
+          .outerRadius(r);
+      var arcOver = d3.svg.arc()
+          .innerRadius(inner + 5)
+          .outerRadius(r + 5);
+      var arcLine = d3.svg.arc()
+          .innerRadius(inner)
+          .outerRadius(inner + 5);
+      var pie = d3.layout.pie()
+          .value(function(d) { return +d.production; });
+      var textTop = vis.append("text")
+         .attr("dy", ".35em")
+         .style("text-anchor", "middle")
+         .attr("class", "textTop")
+         .text( "Total Production" )
+         .attr("y", -10),
+      textBottom = vis.append("text")
+          .attr("dy", ".35em")
+          .style("text-anchor", "middle")
+          .attr("class", "textBottom")
+          .text(numFormat(sum.toFixed(0)) + " Thousand MWh")
+          .attr("y", 10);
+      var arcs = vis.selectAll("g.slice")
+        .data(pie)
+        .enter()
+          .append("svg:g")
+          .attr("class", "slice")
 
-  var arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(radius - 200);
+          .on("mouseover", function(d) {
+            d3.select(this).select("path").transition()
+              .duration(100)
+              .attr("d", arcOver);
+            textTop.text( d3.select(this).datum().data.name );
+            textBottom.text( ((d3.select(this).datum().data.production/sum)*100).toFixed(2) + "%");
+          })
 
-  var pie = d3.layout.pie()
-      .sort(null)
-      .value(function(d) { return d.production; });
+          .on("mouseout", function(d) {
+           d3.select(this).select("path").transition()
+            .duration(100)
+            .attr("d", arc);
+          textTop.text( "Total Production" );
+          textBottom.text(numFormat(sum.toFixed(0)) + " Thousand MWh");
+      });
 
-  var svg = d3.select("#container").append("svg")
-      .attr("width", width)
-      .attr("height", height)
-    .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-  d3.json(url, function(error, data) {
-    data.forEach(function(d) {
-      d.production = +d.production;
-    });
-
-    var g = svg.selectAll(".arc")
-        .data(pie(data))
-      .enter().append("g")
-        .attr("class", "arc");
-    g.append("path")
-        .attr("d", arc)
-        .style("fill", function(d) { return color(d.data.production); });
-
-    g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", ".35em")
-        .attr("font-size", "12px")
-        .style("text-anchor", "middle")
-        .text(function(d) { return d.data.name + " - " + d.data.production; });
-  });
+     arcs.append("svg:path")
+      .attr("fill", function(d, i) { return color(i); } )
+      .attr("d", arc);
+ });
 });
 
 
