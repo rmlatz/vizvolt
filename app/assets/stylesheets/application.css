@@ -37,6 +37,7 @@ p {
 
 header {
   text-align: center;
+  border-bottom: 2px solid #000;
 }
 
 .donut_holder{
